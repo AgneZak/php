@@ -13,6 +13,8 @@
 <style>
 body {
     background: rgb(<?php print rand(0,255) . ',' . rand(0,255) . ',' . rand(0,255);?>);
+    display: flex;
+    justify-content: center;
 }
 h1{
     font-size: <?php print rand(10,100);?>px;
@@ -22,7 +24,7 @@ p{
 }
 </style>
 <body>
-<img src="dice_<?php print rand(1,6);?>.png" alt="[ Random Image ]" height="100" width="100" />
+<img src="images/dice_<?php print rand(1,6);?>.png" alt="[ Random Image ]" height="100" width="100" />
 
 </body>
 </html>
