@@ -22,18 +22,7 @@ p{
 }
 </style>
 <body>
-<h1>
-    Keiciu dydi!<br>
-    <strong>Agnė</strong> - Galbūt turėsiu
-    <?php print rand(1, 5); ?> vaikų(us)!
-</h1>
-<p>
-    Keiciu spalva!<br>
-    D. Trump'as nebebus prezidentu:<br>
-    <?php print date('Y-m-d', strtotime('+' . rand(2, 10) . 'year')); ?>
-</p>
-
-<img src="dice_<?php print rand(1,6);?>.png" alt="[ Random Image ]" height="50" width="50" />
+<img src="dice_<?php print rand(1,6);?>.png" alt="[ Random Image ]" height="100" width="100" />
 
 </body>
 </html>
