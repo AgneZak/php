@@ -32,5 +32,8 @@ p{
     D. Trump'as nebebus prezidentu:<br>
     <?php print date('Y-m-d', strtotime('+' . rand(2, 10) . 'year')); ?>
 </p>
+
+<img src="dice_<?php print rand(1,6);?>.png" alt="[ Random Image ]" height="50" width="50" />
+
 </body>
 </html>
