@@ -1,9 +1,23 @@
 <?php
-    $minutes = abs(date('i')-59);
-    $minutes_remain = $minutes % 5;
+    $name = 'Agne';
+    $age = rand(15,35);
+    $teistumas = rand(0,1);
 
-    $seconds = abs(date('s')-59);    
-    $percents = $minutes_remain.$seconds / 60 * 100;
+    if($teistumas){
+        $teistumas_tekstas = 'teistas';
+    } else{
+        $teistumas_tekstas = 'neteistas';
+    }
+
+    if($age < 25 && $age > 18 && $teistumas){
+        $h2 = 'nėra šaukiamas į kariuomenę';
+    } else {
+        if(!$teistumas){
+            $h2 = 'yra šaukiamas į kariuomenę'; 
+        } else {
+            $h2 = 'nėra šaukiamas į kariuomenę';
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -20,34 +34,16 @@ body{
     align-items: center;
     height: 100vH;
 }
-.joint-smoked{
-    background-image: url(https://banner2.cleanpng.com/20190807/hoc/kisspng-drawing-joint-blunt-cannabis-design-5d4a4f196c73d6.5354688115651510014442.jpg);
-    background-size: cover;
-    width:<?php print $percents; ?>px;
-    height:400px;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    left:0;
-    
-}
-.joint{
-    position:relative;
-    background-image: url(https://w7.pngwing.com/pngs/140/121/png-transparent-joint-medical-cannabis-blunt-deal-with-it-angle-fashion-auto-part-thumbnail.png);
-    background-size: cover;
-    width:400px;
-    height:400px;
-    display: flex;
-    justify-content: center;
-}
 
 </style>
 <body>
-    <div class="joint">
-        <div class='joint-smoked'></div>
-    </div>
+    <ul>
+        <li><?php print $name;?></li>
+        <li><?php print $age;?></li>
+        <li>Teistumas:<?php print $teistumas_tekstas;?></li>
+    </ul>
+    <h2><?php print $name. ' '.$h2; ?></h2>
     
-    <p>Liko <?php print $minutes_remain . ':' .$seconds; ?> </p>
     
 </body>
 </html>
