@@ -1,53 +1,62 @@
 <?php
-$sunny = rand(0,1);
-$rainy = rand(0,1);
+    date_default_timezone_set('Europe/Vilnius');
+    $hours = date('h')*30;
+    $minutes = date('m')*0.5;
+    $seconds = date('s')*6;
 
-if ($sunny) {
-    if($rainy){
-        $h2 = "It's rainy with clouds";
-        $weather_class = "weather--sun-rain";
-    } else {
-        $h2 = "It's sunny";
-        $weather_class = "weather--sunny";
-    }
-} else {
-    if(!$rainy){
-        $h2 = "It's cloudy";
-        $weather_class = "weather--cloudy";
-    }else{
-        $h2 = "It's rainy";
-        $weather_class = "weather--rainy";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Oras</title>
+    <title>Clock</title>
 </head>
 <style>
-.weather{
-    background-size: cover;
-    width:50px;
-    height:50px;
-}
-.weather--rainy{
-    background-image: url(https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png);
-}
-.weather--sunny{
-    background-image: url(https://www.pinclipart.com/picdir/middle/5-51534_clipart-of-a-sun-sunny-icon-png-download.png);
-}
-.weather--sun-rain{
-    background-image: url(https://toppng.com/uploads/preview/sun-behind-rain-cloud-icon-cloud-and-rain-transparent-ico-11562909339q8plfa1nfd.png);
-}
-.weather--cloudy{
-    background-image: url(https://png.pngtree.com/png-vector/20190214/ourlarge/pngtree-vector-cloudy-icon-png-image_450295.jpg);
-}
+body{
+    display: flex;
+    justify-content: center;
 
+}
+.clock{
+    background-image: url(https://lh3.googleusercontent.com/proxy/qIJqnxKSIZGeQfnhPokRMHI0kYJ-blISVvBkXp-VlwW_Uj3bfsWs1OPF3rWX59Hy7diyHlaLQpvG5Hr4rc5qjSanuYzCqD7aktJk-9MxCRgW7Zs54oQ_kUX3mdIPMUF8dUmfmgoWQWyDlcOKBOU);
+    background-size: cover;
+    width:400px;
+    height:400px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.hours{
+    background-color: black;
+    height:200px;
+    width:10px;
+    transform: rotate(<?php print $hours;?>deg);
+    transform-origin: 10% 100%;
+
+}
+.minutes{
+    background-color: red;
+    height:200px;
+    width:5px;
+    transform: rotate(<?php print $minutes;?>deg);
+    transform-origin: 10% 100%;
+
+}
+.seconds{
+    background-color: blue;
+    height:200px;
+    width:5px;
+    transform: rotate(<?php print $seconds;?>deg);
+    transform-origin: 10% 100%;
+
+}
 </style>
 <body>
-    <div class="weather <?php print $weather_class; ?>"></div>
-    <h2><?php print $h2; ?></h2>
+    <div class="clock">
+        <div class='hours'></div>
+        <div class='minutes'></div>
+        <div class='seconds'></div>
+    </div>
+    
 </body>
 </html>
