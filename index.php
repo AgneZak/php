@@ -2,21 +2,27 @@
     $name = 'Agne';
     $age = rand(15,35);
     $teistumas = rand(0,1);
+    $kids = rand(1,5);
 
     if($teistumas){
-        $teistumas_tekstas = 'teistas';
+        $teistumas_tekstas = 'teista';
     } else{
         $teistumas_tekstas = 'neteistas';
     }
 
-    if($age < 25 && $age > 18 && $teistumas){
-        $h2 = 'nėra šaukiamas į kariuomenę';
-    } else {
-        if(!$teistumas){
-            $h2 = 'yra šaukiamas į kariuomenę'; 
-        } else {
-            $h2 = 'nėra šaukiamas į kariuomenę';
+    if ($age > 25 || $age < 18 || $teistumas || $kids > 2){
+        $h2 = 'nėra šaukiamas į kariuomenę, nes ';
+        if($age > 25){
+            $h2 .= "per sena"; 
+        } if($age < 18){
+            $h2 .= "per jauna";
+        } if($kids > 2){
+            $h2 .= " turi {$kids} vaikus";
+        } if($teistumas){
+            $h2 .= " {$teistumas_tekstas}";
         }
+    } else {
+        $h2 = 'yra šaukiamas į kariuomenę'; 
     }
 
 ?>
@@ -24,7 +30,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Joint'o Load</title>
+    <title>Kariuomene</title>
 </head>
 <style>
 body{
@@ -40,6 +46,7 @@ body{
     <ul>
         <li><?php print $name;?></li>
         <li><?php print $age;?></li>
+        <li>Turi vaiku:<?php print $kids;?></li>
         <li>Teistumas:<?php print $teistumas_tekstas;?></li>
     </ul>
     <h2><?php print $name. ' '.$h2; ?></h2>
