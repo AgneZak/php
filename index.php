@@ -1,34 +1,61 @@
-<!doctype html>
-<?php date_default_timezone_set('Europe/Vilnius') ?>
+<?php
+$sunny = rand(0,1);
+$rainy = rand(0,1);
+$weather = ' ';
+
+if ($sunny) {
+    if($rainy){
+        $h2 = "It's rainy with clouds";
+        $weather = "sun-rain";
+    } else {
+        $h2 = "It's sunny";
+        $weather = "sunny";
+    }
+} else {
+    if(!$rainy){
+        $h2 = "It's cloudy";
+        $weather = "cloudy";
+    }else{
+        $h2 = "It's rainy";
+        $weather = "rainy";
+    }
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php print 'PHP lydes ir  ' . date('Y.m.d', strtotime('+' . rand(1, 15) . 'year')) . ' !'; ?>;</title>
-    <style>
-        .bomb {
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-image: url("https://static01.nyt.com/images/2020/03/08/magazine/08Mag-Tip-01/08Mag-Tip-01-videoSixteenByNineJumbo1600.jpg");
-        }
-        .bomb-container {
-            width: <?php print date('s')*10?>px;
-            height: <?php print date('s')*10?>px;
-        }
-
-
-
-    </style>
+    <meta charset="utf-8">
+    <title>Oras</title>
 </head>
+<style>
+.rainy{
+    background-image: url(https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png);
+    height:50px;
+    width:50px;
+    background-size: cover;
+}
+.sunny{
+    background-image: url(https://www.pinclipart.com/picdir/middle/5-51534_clipart-of-a-sun-sunny-icon-png-download.png);
+    height:50px;
+    width:50px;
+    background-size: cover;
+}
+.sun-rain{
+    background-image: url(https://toppng.com/uploads/preview/sun-behind-rain-cloud-icon-cloud-and-rain-transparent-ico-11562909339q8plfa1nfd.png);
+    height:50px;
+    width:50px;
+    background-size: cover;
+}
+.cloudy{
+    background-image: url(https://png.pngtree.com/png-vector/20190214/ourlarge/pngtree-vector-cloudy-icon-png-image_450295.jpg);
+    height:50px;
+    width:50px;
+    background-size: cover;
+}
+
+</style>
 <body>
-    <div class="bomb bomb-container">
-        <div> <?php switch (date ('s')){
-                case '59': print '<img src="https://www.pitara.com/media/nuclear-bomb-conventional-bomb-2.jpg" alt="" />';
-            }?>
-        </div>
-    </div>
-    <p><?php print date("s") ?></p>
+    <div class="<?php print $weather; ?>"></div>
+    <h2><?php print $h2; ?></h2>
 </body>
-</html
+</html>
