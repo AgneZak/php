@@ -3,6 +3,9 @@ $days = 365;
 
 $pack_price = 3.5;
 
+$time_per_cig = 5;
+$img = "https://pngimg.com/uploads/cigarette/cigarette_PNG4755.png";
+
 for($i = 1; $i <= $days; $i++){
     $day_of_week = (int) date('N', strtotime("+$i days"));
 
@@ -20,9 +23,11 @@ for($i = 1; $i <= $days; $i++){
 }
 $price_ttl = ceil($count_ttl/20)*$pack_price;
 $total_mon_fri = ceil($mon_fri_ttl/20)*$pack_price;
+$time_total = floor(($count_ttl*$time_per_cig)/60);
 
 $h2 = "Per $days dienas, surukyta $count_ttl cigareciu uz $price_ttl eur";
 $h3 = "Nerukydamas darbo dienomis, sutaupyciau $total_mon_fri eur";
+$h4 = "Viso traukdamas prastovėsiu $time_total valandu per metus";
 
 ?>
 <!DOCTYPE html>
@@ -39,12 +44,37 @@ body{
     align-items: center; 
     
 }
-
+.container{
+    display: flex;
+    flex-wrap:wrap;
+    width: 800px;
+}
+.cigar{
+    content: url(<?php print $img;?>);
+    height:50px;
+}
+.pack{
+    border: 1px solid black;
+    margin: 5px;
+    display: flex;
+    flex-wrap:wrap;
+    width:250px;
+}
 </style>
 <body>
     <h1>Mano dumu skaiciuokle</h1>
     <h2><?php print $h2;?></h2>
     <h3><?php print $h3;?></h3>
-   
+    <h4><?php print $h4;?></h4>
+    <div class ="container">
+        <?php for( ;$count_ttl >= 0; ): ?>
+            <div class ="pack">
+                <?php for($c = 1; $c <= 20 && $count_ttl >= 0; $c++, $count_ttl--): ?>
+                    <div class="cigar"></div>
+                <?php endfor; ?>
+            </div>
+        <?php endfor; ?>
+    </div> 
+
 </body>
 </html>
