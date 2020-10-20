@@ -1,5 +1,28 @@
 <?php
-$condition = 4%2 == 0;
+$days = 365;
+
+$pack_price = 3.5;
+
+for($i = 1; $i <= $days; $i++){
+    $day_of_week = (int) date('N', strtotime("+$i days"));
+
+    if ($day_of_week <= 5) {
+        $cigs_mon_fri = rand(3,4);
+        $count_ttl += $cigs_mon_fri;
+        $mon_fri_ttl += $cigs_mon_fri;
+    } elseif ($day_of_week == 6) {
+        $cigs_sat = rand(10,20);
+        $count_ttl += $cigs_sat;
+    } else {
+        $cigs_sun = rand(1,3);
+        $count_ttl += $cigs_sun;
+    }
+}
+$price_ttl = ceil($count_ttl/20)*$pack_price;
+$total_mon_fri = ceil($mon_fri_ttl/20)*$pack_price;
+
+$h2 = "Per $days dienas, surukyta $count_ttl cigareciu uz $price_ttl eur";
+$h3 = "Nerukydamas darbo dienomis, sutaupyciau $total_mon_fri eur";
 
 ?>
 <!DOCTYPE html>
@@ -11,31 +34,17 @@ $condition = 4%2 == 0;
 <style>
 body{
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    /* height: 100vH; */
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    
 }
-div{
-    border: 1px solid black;
-    height:30px;
-    width:30px;
-}
-.black{
-    background-color:black;
-}
+
 </style>
 <body>
-    <?php for($x = 1; $x <= 8; $x++):?>
-    <div>
-        <?php for($i = 1; $i <= 8; $i++):?>
-        <?php if(($x + $i) % 2 == 0){ ?>
-          <div class='black'></div>
-          <?php } else { ?>
-         <div></div>
-         <?php } ?>
-        <?php endfor;?>
-    </div>
-    <?php endfor;?>
+    <h1>Mano dumu skaiciuokle</h1>
+    <h2><?php print $h2;?></h2>
+    <h3><?php print $h3;?></h3>
    
 </body>
 </html>
