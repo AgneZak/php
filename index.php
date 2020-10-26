@@ -1,34 +1,34 @@
 <?php
-$serialas = [
+
+$police_report =[
     [
-        'year' => 2020,
-        'episodes' => rand (20,25),
-        'duration' => rand (20,25)
+        'subject' => 'Domantas',
+        'reason' => 'Public Uranation',
+        'amount' => rand(-100, 250)
     ],
     [
-        'year' => 2019,
-        'episodes' => rand (20,25),
-        'duration' => rand (20,25)
-
-
+        'subject' => 'Dainius',
+        'reason' => 'Drunk in public',
+        'amount' => rand(-100, 250)
     ],
     [
-        'year' => 2018,
-        'episodes' => rand (20,25),
-        'duration' => rand (20,25)
-
+        'subject' => 'Andrius',
+        'reason' => 'Speeding',
+        'amount' => rand(-100, 250)
     ]
 ];
-$ziuriu_per_diena = 60;
 
-$how_much_episodes = 0;
-$how_long = 0;
-foreach ($serialas as $key => $value) {
-    $how_much_episodes += $value['episodes'];
-    $how_long += $value['duration']*$value['episodes'];
+foreach ($police_report as $key => $report) {
+    $warning = rand(0, 1);
+    $police_report[$key]['warning_only'] = $warning ? true : false;
+
+    if($report['amount'] <= 0) {
+        $police_report[$key]['css_class'] = 'income';
+    } else {
+        $police_report[$key]['css_class'] = 'expense';
+    };
 }
-$days_f = number_format($how_long / $ziuriu_per_diena, 2);
-
+var_dump($police_report);
 
 ?>
 <!DOCTYPE html>
@@ -38,13 +38,25 @@ $days_f = number_format($how_long / $ziuriu_per_diena, 2);
     <title>Array</title>
 </head>
 <style>
+.income{
+    color: green;
+}
+.expense{
+    color:red;
+}
 
 </style>
 <body>  
 <section>
-<p><?php print $how_much_episodes; ?> epizodu is viso</p>
-<p><?php print $how_long; ?> minutes </p>
-<p><?php print $days_f; ?> dienu</p>
+    <h1>Policijos israsas</h1>
+    <ul>
+        <?php foreach($police_report as $report): ?>
+            <li class = '<?php print $report['css_class'];?>'>
+                <?php print $report['subject']. ' (' . $report['reason'] . ') -';?>
+                <?php print $report['warning_only'] ? 'Ispejimas' : $report['amount'];?>
+            </li>
+        <?php endforeach; ?>   
+    </ul>
 </section>   
 </body>
 </html>
