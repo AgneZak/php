@@ -1,92 +1,40 @@
 <?php
-$cars=[
+$products = [
     [
-        'brand' => 'BMW',
-        'model' => 'X3',
-        'image' => 'https://www.bmw.lt/content/bmw/marketLT/bmw_lt/lt_LT/all-models/x-series/X3/2019/bmw-x3-ikvepia/jcr:content/par/highlight_7770/highlightitems/highlightitem_45f3/image/mobile.transform/highlight/image.1551097644290.jpg',
-        'year' => 2015,
-        'price' => rand(100000,500000),
-        'on_sale' => rand(0,1) ? true : false
+        'name' => 'Stumbro degtinele',
+        'price' => 6.49,
+        'image' => 'https://iki.lt/wp-content/uploads/alk/247119.jpg',
+        'amount' => rand(0,1)
     ],
     [
-        'brand' => 'BMW',
-        'model' => 'i3',
-        'image' => 'https://www.motortrend.com/uploads/sites/5/2017/12/2018-BMW-i3s-front-three-quarter-06-1.jpg',
-        'year' => 2015,
-        'price' => rand(100000,500000),
-        'on_sale' => rand(0,1) ? true : false
+        'name' => 'Balzamas',
+        'price' => 9.5,
+        'price_special' => 7.99,
+        'image' => 'https://iki.lt/wp-content/uploads/alk/244784.jpg',
+        'amount' => rand(0,1)
+
     ],
     [
-        'brand' => 'BMW',
-        'model' => '520d',
-        'image' => 'https://cdn.fleetnews.co.uk/web/1/cars/11332.jpg',
-        'year' => 2015,
-        'price' => rand(100000,500000),
-        'on_sale' => rand(0,1) ? true : false
+        'name' => 'Tekila',
+        'price' => 15.99,
+        'image' => 'https://iki.lt/wp-content/uploads/alk/11496.jpg',
+        'amount' => rand(0,1)
+
     ],
     [
-        'brand' => 'Audi',
-        'model' => 'A6',
-        'image' => 'https://jp.lt/wp-content/uploads/2018/06/Audi_A6_2.jpg',
-        'year' => 2015,
-        'price' => rand(100000,500000),
-        'on_sale' => rand(0,1) ? true : false
-    ],
-    [
-        'brand' => 'Audi',
-        'model' => 'A8',
-        'image' => 'https://s1.15min.lt/static/cache/OTI1eDYxMCw4MDB4NjQ0LDYyMzI3NCxvcmlnaW5hbCwsaWQ9MzM5Nzk0NiZkYXRlPTIwMTclMkYxMCUyRjA2LDMxNjg4MTg3ODQ=/audi-a8-59d73d6cd8bc8.jpg',
-        'year' => 2015,
-        'price' => rand(100000,500000),
-        'on_sale' => rand(0,1) ? true : false
-    ],
-    [
-        'brand' => 'Audi',
-        'model' => 'RS6',
-        'image' => 'https://autoplius-img.dgn.lt/nak_12_40813/audi-rs6.jpg',
-        'year' => 2015,
-        'price' => rand(100000,500000),
-        'on_sale' => rand(0,1) ? true : false
-    ],
+        'name' => 'Pivo alus',
+        'price' => 4.99,
+        'price_special' => 2.99,
+        'image' => 'https://www.vynoguru.lt/media/catalog/product/a/l/alus_corona_extra.jpg',
+        'amount' => rand(0,1)
+    ]
 ];
 
-shuffle($cars);
-
-$rand_brand = rand(0,1);
-$car_by_brand = [];
-$car_brand_audi = 'Audi';
-$car_brand_bmw = 'BMW';
-
-if($rand_brand){
-    foreach ($cars as $key => $car) {
-        if($car_brand_audi === $car['brand']) {
-            $car_by_brand[] = $car;
-        };
-    }
-} else {
-    foreach ($cars as $key => $car) {
-        if($car_brand_bmw === $car['brand']) {
-            $car_by_brand[] = $car;
-        };
+foreach ($products as $key => $bottle) {
+    if(array_key_exists('price_special', $bottle)) {
+        $products[$key]['percent'] = number_format(($bottle['price']-$bottle['price_special'])*100/$bottle['price'],2);
     }
 };
-
-$minimal_price = 222222;
-$car_by_price = [];
-foreach ($cars as $car){
-    if($minimal_price <= $car['price']){
-        $car_by_price[] = $car;
-    };
-};
-
-$max_price = 333333;
-$car_by_max_price = [];
-foreach ($cars as $car){
-    if($max_price >= $car['price']){
-        $car_by_max_price[] = $car;
-    };
-};
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,63 +43,70 @@ foreach ($cars as $car){
     <title>Array</title>
 </head>
 <style>
-body{
-    margin: 0 auto;
-    height: 100vH;
-}
-header,
-footer{
-    background-color: grey;
-    text-align: center;
-    padding: 5px;
-    margin: 0 auto;
+img{
+    width: 40px;
+    height:140px;
 }
 main{
-    height: 100vh;
+    text-align: center;
 }
-img{
-    height: 150px;
+main > div{
+    display:flex;
+}
+div > div {
     width: 200px;
-    object-fit: cover;
+    text-align:center;
+    margin: 10px;
+    border: 1px solid grey;
 }
 section{
     display: flex;
-    flex-wrap: wrap;
-    width: 700px;
-    margin: 0 auto;
-    justify-content: center;
+    justify-content:flex-end;
+}
+.price,
+.red{
+    border: 1px solid grey;
+    padding: 10px;
+    color: white;
+}
+.red{
+    background-color: red;
 }
 .price{
-    border: 1px solid grey;
-    cursor: pointer;
-    padding: 10px;
+    background-color: black;
+    margin-left: 40px;
 }
-.car-card{
-    margin: 10px;
-    border: 1px solid grey;
-    text-align: center;
+.stock{
+    color: green;
+}
+.no-stock{
+    color: red;
+}
+.grayscale{
+    filter: grayscale(100%);
+
 }
 </style>
 <body> 
-    <header>
-        <h1>Our newest cars!</h1>
-    </header>
-    <main>
-        <section>
-            <?php foreach ($car_by_max_price as $key => $car): ?>
-                <div class = 'car-card'>
-                    <div><img src="<?php print $car['image']; ?>" alt="car-photo"></div>
-                    <div>
-                        <p><?php print $car['brand'] . ' ' .$car['model']; ?></p>
-                        <p><?php print 'Year: ' . $car['year']; ?></p>
-                        <div class = 'price' style = 'background-color:<?php print $car['on_sale'] ? 'red' : 'green'; ?>'><?php print $car['on_sale'] ? 'SOLD OUT' : $car['price'] . ' Eur'; ?></div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </section>
-    </main>   
-    <footer>
-    <p>C 2010</p>
-    </footer>
+<main>
+    <h1>Drink catalogue</h1>
+    <div>
+        <?php foreach ($products as $key => $drink): ?>
+            <div>
+                <section> 
+                    <?php if (isset($drink['price_special'])): ?>
+                        <p class='red'><?php print '- '. $drink['percent'] . '%'; ?></p>
+                        <p class = 'price'><?php print $drink['price_special']. ' Eur'; ?></p>
+                    <?php else: ?>
+                        <p class = 'price'><?php print $drink['price']. ' Eur'; ?></p>
+                    <?php endif; ?>
+                </section>
+                <img class = '<?php print $drink['amount'] > 0 ? '' : 'grayscale'; ?>' src="<?php print $drink['image'];?>" alt="">
+                <h2><?php print $drink['name']; ?></h2>
+                <p class = '<?php print $drink['amount'] > 0 ? 'stock' : 'no-stock'; ?>'><?php print $drink['amount'] > 0 ? 'Yra sandelyje':'Nera sandelyje'; ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</main>
 </body>
 </html>
