@@ -13,6 +13,7 @@ function generate_matrix($size) {
 $array = generate_matrix(rand(2,3));
 
 function get_winning_rows($matrix) {
+    $winning_rows = [];
 
     foreach ($matrix as $key => $row) {
         $sum = 0;
@@ -20,15 +21,22 @@ function get_winning_rows($matrix) {
         foreach ($row as $row_key => $value) {
             $sum += $value;            
         }
-        
+
         if($sum === count($matrix)){
-            print "$key";
+            $winning_rows[] = $key;
         } elseif($sum === 0){
-            print "$key";
+            $winning_rows[] = $key;
         }
     }
+
+    return $winning_rows;
 }
-get_winning_rows($array)
+$win_array = get_winning_rows($array);
+
+
+
+var_dump($array);
+var_dump($win_array);
 
 
 ?>
@@ -55,13 +63,16 @@ get_winning_rows($array)
     height:50px;
     margin: 4px;
 }
+.win{
+    border: 1px solid red;
+}
 </style>
 <body> 
 <main>
     <?php foreach ($array as $key => $row): ?>
-        <div class='row'>
-            <?php foreach ($row as $key => $cube): ?>
-                <div class = '<?php print $cube ? 'blue': 'yellow';?>'></div>
+        <div class='row <?php print in_array($key, $win_array) ? 'win' : ''; ?>'>
+            <?php foreach ($row as $row_key => $cube): ?>
+                <div class = '<?php print $cube ? 'blue': 'yellow'; ?>'></div>
             <?php endforeach; ?>
         </div>
     <?php endforeach; ?>
