@@ -1,47 +1,36 @@
 <?php
-$x = rand(1,100);
-$y = rand(1,100);
-
-function is_prime($number) {
-    if ($number === 1) {
-        return false;
-    }
-    for ($i = 2; $i <= $number/2; $i++) {
-        if ($number % $i == 0) {
-            return false;
+function generate_matrix($size) {
+    $array = [];
+    for ($i = 0; $i < $size; $i++) { 
+        for ($a=0; $a < $size; $a++) { 
+            $array[$i][$a] = rand(0,1);
         }
     }
-    return true;
+    
+    return $array;
 }
 
-$answer = is_prime($x);
-$answer_two = is_prime($y);
+$array = generate_matrix(rand(2,3));
 
-if ($answer) {
-    $p_x = "$x is prime";
-} else {
-    $p_x = "$x is not prime";
-}
+function get_winning_rows($matrix) {
 
-if ($answer_two) {
-    $p_y = "$y is prime";
-} else {
-    $p_y = "$y is not prime";
-}
-
-function sum_if_prime($x, $y) {
-    if (is_prime($x) && is_prime($y)) {
-        return $x + $y;
+    foreach ($matrix as $key => $row) {
+        $sum = 0;
+        
+        foreach ($row as $row_key => $value) {
+            $sum += $value;            
+        }
+        
+        if($sum === count($matrix)){
+            print "$key";
+        } elseif($sum === 0){
+            print "$key";
+        }
     }
 }
+get_winning_rows($array)
 
-$sum = sum_if_prime($x, $y);
 
-if ($sum) {
-    $p_sum ="The sum of prime is $sum";
-} else {
-    $p_sum ="The sum of prime is $sum";
-}
 ?>
 
 <!DOCTYPE html>
@@ -51,13 +40,31 @@ if ($sum) {
     <title>Function</title>
 </head>
 <style>
-    
+.row{
+    display:flex;
+}
+.yellow{
+    background-color: gold;
+    width: 50px;
+    height:50px;
+    margin: 4px;
+}
+.blue{
+    background-color:darkcyan;
+    width: 50px;
+    height:50px;
+    margin: 4px;
+}
 </style>
 <body> 
 <main>
-    <p><?php print $p_x; ?></p>
-    <p><?php print $p_y; ?></p>
-    <p><?php print $p_sum; ?></p>
+    <?php foreach ($array as $key => $row): ?>
+        <div class='row'>
+            <?php foreach ($row as $key => $cube): ?>
+                <div class = '<?php print $cube ? 'blue': 'yellow';?>'></div>
+            <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
 </main>
 </body>
 </html>
