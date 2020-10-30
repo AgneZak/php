@@ -112,6 +112,14 @@ function four_of_the_kind($array){
     }
 }
 $four_answer = 'Do i have 4 of the kind? :' . four_of_the_kind($same);
+
+function full_house(){
+    if (three_of_the_kind($same) && card_pair($same)) {
+        return 'YES';
+    } else return 'NO';
+}
+
+$full_house_answer = 'Do I have full house? :' . full_house();
 ?>
 <!doctype html>
 <html lang="en">
@@ -183,7 +191,7 @@ section {
 <h2> <?php print $pairs_answer; ?></h2>
 <h2> <?php print $three_answer; ?></h2>
 <h2> <?php print $four_answer; ?></h2>
-
+<h2> <?php print $full_house_answer; ?></h2>
 
 </body>
 </html>
