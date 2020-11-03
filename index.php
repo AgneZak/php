@@ -1,12 +1,29 @@
 <?php
-$width = 20;
-$number = 0;
+var_dump($_POST);
 
-if (isset($_POST['submit'])) {
-    $number = (int) $_POST['submit'];
-    $number++;
-    $width*=$number;      
+$form = [
+    'email' => [
+        'label' => 'Email:',
+        'type' => 'text',
+        'placeholder' => 'agne@gmail.com'
+    ],
+    'password' => [
+        'label' => 'Password:',
+        'type' => 'password',
+        'placeholder' => 'Your password...'
+    ]
+];
+
+function get_clean_input($form){
+    $parameters=[];
+    foreach ($form as $key => $input) {
+        $parameters[$key] = FILTER_SANITIZE_SPECIAL_CHARS;
+    }
+
+    return filter_input_array(INPUT_POST, $parameters);   
 }
+
+var_dump(get_clean_input($form));
 
 ?>
 <!doctype html>
@@ -19,22 +36,23 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="style.css">
     <title>Forms</title>
 <style>
-form{
-    display: flex;
-    flex-direction: column;
-}
-button{
-    width: 50px;
-    padding: 10px;
-}
+
+
 </style>
 </head>
 <body>
     <main>
+        <h1><?php print $isiltruota['email']; ?></h1>
         <form method="post">
-            <button name='submit' value='<?php print $number;?>'><?php print $number; ?></button>
-            <img style='width: <?php print $width;?>px' src="https://www.thermofisher.com/blog/food/wp-content/uploads/sites/5/2015/08/single_strawberry__isolated_on_a_white_background.jpg" alt="berry">
+            <?php foreach($form as $key => $input): ?>
+                <label>
+                    <?php print $input['label']; ?>
+                    <input name='<?php print $key; ?>'type='<?php print $input['type']; ?>' placeholder='<?php print $input['placeholder']; ?>'>
+                </label>
+            <?php endforeach; ?>
+            <button type="submit" name='button'>Log in</button>
         </form>
+        
     </main>
 </body>
 </html>
