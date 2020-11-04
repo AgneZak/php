@@ -1,29 +1,55 @@
 <?php
-var_dump($_POST);
+
+require './functions/html.php';
+require './functions/form.php';
 
 $form = [
-    'email' => [
-        'label' => 'Email:',
-        'type' => 'text',
-        'placeholder' => 'agne@gmail.com'
+    'fields' => [
+        'email' => [
+            'label' => 'Email:',
+            'type' => 'text',
+            'value' => 'agne@gmail.com',
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'agne@gmail.com',
+                    'class' => 'input-field'
+                ]
+            ]
+        ],
+        'password' => [
+            'label' => 'Password:',
+            'type' => 'password',
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Your password...',
+                    'class' => 'input-field'
+                ]
+            ]
+        ]
     ],
-    'password' => [
-        'label' => 'Password:',
-        'type' => 'password',
-        'placeholder' => 'Your password...'
+    'buttons' => [
+        'login' => [
+            'title' => 'Log in',
+            'type' => 'submit',
+            'extra' => [
+                'attr' => [
+                    'class' => 'btn'
+                ]
+            ] 
+        ],
+        'clear' => [
+            'title' => 'Clear',
+            'type' => 'reset',
+            'extra' => [
+                'attr' => [
+                    'class' => 'btn'
+                ]
+            ]
+        ]
     ]
 ];
 
-function get_clean_input($form){
-    $parameters=[];
-    foreach ($form as $key => $input) {
-        $parameters[$key] = FILTER_SANITIZE_SPECIAL_CHARS;
-    }
 
-    return filter_input_array(INPUT_POST, $parameters);   
-}
-
-var_dump(get_clean_input($form));
 
 ?>
 <!doctype html>
@@ -37,22 +63,24 @@ var_dump(get_clean_input($form));
     <title>Forms</title>
 <style>
 
-
 </style>
 </head>
 <body>
     <main>
         <h1><?php print $isiltruota['email']; ?></h1>
         <form method="post">
-            <?php foreach($form as $key => $input): ?>
+            <?php foreach($form['fields'] as $input_name => $input): ?>
                 <label>
-                    <?php print $input['label']; ?>
-                    <input name='<?php print $key; ?>'type='<?php print $input['type']; ?>' placeholder='<?php print $input['placeholder']; ?>'>
+                    <span><?php print $input['label']; ?></span>
+                    <input <?php print input_attr($input_name, $input); ?>>
                 </label>
             <?php endforeach; ?>
-            <button type="submit" name='button'>Log in</button>
+            <?php foreach($form['buttons'] as $button_name => $button): ?>
+                <button <?php print button_attr($button_name, $button); ?>>
+                    <?php print $button['title']; ?>
+                </button>
+            <?php endforeach; ?>
         </form>
-        
     </main>
 </body>
 </html>
