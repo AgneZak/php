@@ -1,0 +1,132 @@
+*{
+    font-family: Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+body{
+    margin: 0 auto;
+}
+main{
+    background-color: #C868A6;
+}
+.wrapper{
+    text-align: center;
+    width: 1100px;
+    margin: 0 auto;
+    min-height: 100vH;
+    padding: 100px 0;
+}
+.header--main{
+    font-size: xx-large;
+}
+.header{
+    color: aliceblue;
+}
+
+/* ----------------------
+             Table
+-------------------------*/
+
+td,
+th,
+table {
+    border: 1px dashed grey;
+}
+td,
+th{
+    padding: 10px;
+}
+
+
+/* ----------------------
+             form
+-------------------------*/
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+label{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin-bottom: 5px;
+}
+input,
+textarea,
+select{
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+}
+textarea{
+    resize: none;
+}
+button{
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid #BA68C8;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 100px;
+    margin: 5px;
+    background-color: aliceblue;
+}
+/* ----------------------
+             nav
+-------------------------*/
+
+nav{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: #C88A68;
+    z-index: 2;
+
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover:not(.active) {
+    background-color: #C868A6;
+}
+/* ----------------------
+             Products
+-------------------------*/
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #C86876;
+    padding: 20px;
+    grid-gap: 50px 25px;
+    border-radius: 25px;
+
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 50px;
+}
+.product-img{
+    width: 200px;
+    height: 300px;
+    object-position: center;
+    object-fit: cover;
+}
