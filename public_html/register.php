@@ -92,7 +92,6 @@ if ($clean_inputs) {
         $fileDB = new FileDB(DB_FILE);
 
         $fileDB->load();
-        $fileDB->createTable('users');
         $fileDB->insertRow('users', $clean_inputs);
         $fileDB->save();
 
