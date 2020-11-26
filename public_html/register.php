@@ -2,6 +2,7 @@
 require '../bootloader.php';
 
 $nav = nav();
+
 $form = [
     'attr' => [
         'method' => 'POST'
@@ -88,22 +89,20 @@ if ($clean_inputs) {
     if ($success) {
         unset($clean_inputs['password_repeat']);
 
-        $rows = file_to_array(ROOT . '/app/data/db.json');
-        $rows[] = $clean_inputs;
+        $fileDB = new FileDB(DB_FILE);
 
-        array_to_file($rows, ROOT . '/app/data/db.json');
+        $fileDB->load();
+        $fileDB->createTable('users');
+        $fileDB->insertRow('users', $clean_inputs);
+        $fileDB->save();
 
         $p = 'Sveikinu uzsireginus';
-        if (is_logged_in()) {
-            header("Location: login.php");
-            exit();
-        }
+
+        header("Location: login.php");
     } else {
         $p = 'Eik nx';
     }
 }
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -112,18 +111,23 @@ if ($clean_inputs) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/media/style.css">
     <title>Register</title>
 </head>
 <body>
 <main>
+
     <?php require ROOT . '/app/templates/nav.tpl.php'; ?>
+
     <article class="wrapper">
         <h1 class="header header--main">Reginkis</h1>
+
         <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+
         <?php if (isset ($p)): ?>
             <p><?php print $p; ?></p>
         <?php endif; ?>
+
     </article>
 </main>
 </body>

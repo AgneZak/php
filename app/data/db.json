@@ -1,22 +1,24 @@
-[
-  {
-    "email": "gg6363@gmail.com",
-    "password": "aaa"
-  },
-  {
-    "email": "gg6363@gmail.com",
-    "password": "aaa"
-  },
-  {
-    "email": "labas@krabas.lt",
-    "password": "krabas"
-  },
-  {
-    "email": "liuksas@liukas.en",
-    "password": "liukas"
-  },
-  {
-    "email": "azakaite@gmail.com",
-    "password": "agne"
-  }
-]
+{
+  "users": [
+    {
+      "email": "test@test.lt",
+      "password": "test"
+    }
+  ],
+  "items": [
+    {
+      "name": "test test",
+      "price": "1000",
+      "img": "https:\/\/ak1.ostkcdn.com\/images\/products\/23591578\/Mens-The-Floor-Is-Lava-Socks-Funny-Footwear-For-Guys-22c31806-51c7-4b32-9e6a-177d0d37731c.jpg",
+      "descr": "fsfsf",
+      "vegan": "Vegan"
+    },
+    {
+      "name": "test test",
+      "price": "666",
+      "img": "https:\/\/ak1.ostkcdn.com\/images\/products\/23591578\/Mens-The-Floor-Is-Lava-Socks-Funny-Footwear-For-Guys-22c31806-51c7-4b32-9e6a-177d0d37731c.jpg",
+      "descr": "labas krabs",
+      "vegan": "Not-Vegan"
+    }
+  ]
+}

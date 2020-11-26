@@ -55,7 +55,7 @@ $form = [
                 ]
             ]
         ],
-        'descrip' => [
+        'descr' => [
             'label' => 'Product Description',
             'type' => 'textarea',
             'validators' => [
@@ -103,16 +103,18 @@ if ($clean_inputs) {
     $success = validate_form($form, $clean_inputs);
 
     if ($success) {
-        $rows = file_to_array(DB_PRODUCTS);
-        $rows[] = $clean_inputs;
+        $fileDB = new FileDB(DB_FILE);
 
-        array_to_file($rows, DB_PRODUCTS);
+        $fileDB->load();
+        $fileDB->createTable('items');
+        $fileDB->insertRow('items', $clean_inputs);
+        $fileDB->save();
+
         $p = 'Sveikinu pridejus preke';
     } else {
         $p = 'Uzpildyki visus laukus';
     }
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -121,18 +123,23 @@ if ($clean_inputs) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/media/style.css">
     <title>Add</title>
 </head>
 <body>
 <main>
+
     <?php require ROOT . '/app/templates/nav.tpl.php'; ?>
+
     <article class="wrapper">
         <h1 class="header header--main">Prideki preke</h1>
+
         <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+
         <?php if (isset ($p)): ?>
             <p><?php print $p; ?></p>
         <?php endif; ?>
+
     </article>
 </main>
 </body>
