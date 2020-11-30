@@ -1,4 +1,7 @@
 <?php
+
+use App\App;
+
 require '../../bootloader.php';
 
 if (!is_logged_in()) {

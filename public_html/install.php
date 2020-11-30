@@ -1,4 +1,7 @@
 <?php
+
+use App\App;
+
 require '../bootloader.php';
 
 App::$db = new FileDB(DB_FILE);

@@ -1,4 +1,7 @@
 <?php
+
+use App\App;
+
 /**
  *
  * Checks if user(data) already exists in our saved file.

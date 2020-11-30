@@ -1,4 +1,7 @@
 <?php
+
+use App\App;
+
 define('ROOT', __DIR__);
 define('DB_FILE', ROOT . '/app/data/db.json');
 
@@ -13,6 +16,7 @@ require 'app/functions/form/validators.php';
 require 'app/functions/form/auth.php';
 require 'app/functions/generators.php';
 require 'app/classes/App.php';
+require 'vendor/autoload.php';
 
 $app = new App();
 

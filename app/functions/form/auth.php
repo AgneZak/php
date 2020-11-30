@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 /**
  * Function checks if user is logged in
  *

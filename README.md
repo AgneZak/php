@@ -15,6 +15,9 @@ Via Composer
 run install.php
 ```
 
+``` bash
+run composer install
+```
 
 ## Usage
 

@@ -1,5 +1,8 @@
 <?php
 
+namespace App;
+
+use Core\FileDB;
 
 class App
 {
