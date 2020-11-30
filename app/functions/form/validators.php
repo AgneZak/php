@@ -12,10 +12,7 @@
  */
 function validate_user_unique(string $field_input, array &$field): bool
 {
-    $fileDB = new FileDB(DB_FILE);
-    $fileDB->load();
-
-    if ($fileDB->getRowWhere('users', ['email' => $field_input])) {
+    if (App::$db->getRowWhere('users', ['email' => $field_input])) {
         $field['error'] = 'Toks vartotojas jau egzistuoja';
 
         return false;
@@ -38,10 +35,7 @@ function validate_user_unique(string $field_input, array &$field): bool
  */
 function validate_login(array $filtered_input, array &$form): bool
 {
-    $fileDB = new FileDB(DB_FILE);
-    $fileDB->load();
-
-    if ($fileDB->getRowWhere('users', [
+    if (App::$db->getRowWhere('users', [
         'email' => $filtered_input['email'],
         'password' => $filtered_input['password']
     ])) {

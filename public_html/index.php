@@ -9,9 +9,7 @@ if (is_logged_in()) {
     $h3 = 'Jus neprisijunges';
 }
 
-$fileDB = new FileDB(DB_FILE);
-$fileDB->load();
-$products = $fileDB->getRowsWhere('items');
+$products = App::$db->getRowsWhere('items');
 ?>
 <!doctype html>
 <html lang="en">

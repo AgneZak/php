@@ -89,11 +89,7 @@ if ($clean_inputs) {
     if ($success) {
         unset($clean_inputs['password_repeat']);
 
-        $fileDB = new FileDB(DB_FILE);
-
-        $fileDB->load();
-        $fileDB->insertRow('users', $clean_inputs);
-        $fileDB->save();
+        App::$db->insertRow('users', $clean_inputs);
 
         $p = 'Sveikinu uzsireginus';
 

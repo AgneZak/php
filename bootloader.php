@@ -12,5 +12,9 @@ require 'core/classes/FileDB.php';
 require 'app/functions/form/validators.php';
 require 'app/functions/form/auth.php';
 require 'app/functions/generators.php';
+require 'app/classes/App.php';
+
+$app = new App();
+
 
 

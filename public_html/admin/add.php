@@ -103,12 +103,7 @@ if ($clean_inputs) {
     $success = validate_form($form, $clean_inputs);
 
     if ($success) {
-        $fileDB = new FileDB(DB_FILE);
-
-        $fileDB->load();
-        $fileDB->createTable('items');
-        $fileDB->insertRow('items', $clean_inputs);
-        $fileDB->save();
+        App::$db->insertRow('items', $clean_inputs);
 
         $p = 'Sveikinu pridejus preke';
     } else {
