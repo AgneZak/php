@@ -55,6 +55,7 @@ class Session
         }
 
         $this->user = null;
+
         return false;
     }
 

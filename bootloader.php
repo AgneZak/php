@@ -16,7 +16,7 @@ require 'app/functions/generators.php';
 require 'app/classes/App.php';
 require 'vendor/autoload.php';
 
-new App();
+$app = new App();
 
 
 

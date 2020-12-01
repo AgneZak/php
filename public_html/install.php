@@ -1,6 +1,7 @@
 <?php
 
 use App\App;
+use Core\FileDB;
 
 require '../bootloader.php';
 
