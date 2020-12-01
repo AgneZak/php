@@ -1,18 +1,19 @@
 <?php
 
-use App\App;
-
 require '../bootloader.php';
+
+use App\App;
 
 $nav = nav();
 
-if (is_logged_in()) {
+if (App::$session->getUser()) {
     $h3 = "Sveiki sugrize {$_SESSION['email']}";
 } else {
     $h3 = 'Jus neprisijunges';
 }
 
 $products = App::$db->getRowsWhere('items');
+
 ?>
 <!doctype html>
 <html lang="en">

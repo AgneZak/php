@@ -1,8 +1,7 @@
 <?php
+require '../bootloader.php';
 
 use App\App;
-
-require '../bootloader.php';
 
 $nav = nav();
 

@@ -1,6 +1,8 @@
 <?php
 require '../bootloader.php';
 
+use App\App;
+
 $nav = nav();
 
 $form = [
@@ -69,9 +71,9 @@ if ($clean_inputs) {
     if ($success) {
         $p = 'Sveikinu prisijungus';
 
-        $_SESSION = $clean_inputs;
+        App::$session->login($clean_inputs['email'], $clean_inputs['password']);
 
-        if (is_logged_in()) {
+        if (App::$session->getUser()) {
             header("Location: admin/add.php");
             exit();
         }

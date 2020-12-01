@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 
 /**
  *
@@ -12,7 +14,7 @@ function nav(): array
 {
     $nav = ['/index.php' => 'Home'];
 
-    if (is_logged_in()) {
+    if (App::$session->getUser()) {
         return $nav + [
             '/admin/add.php' => 'Add',
             '/logout.php' => 'Logout',
