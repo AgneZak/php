@@ -1,10 +1,10 @@
 <?php
+use App\App;
+use App\Views\Navigation;
 
 require '../bootloader.php';
 
-use App\App;
-
-$nav = nav();
+$nav = new Navigation();
 
 if (App::$session->getUser()) {
     $h3 = "Sveiki sugrize {$_SESSION['email']}";
@@ -28,7 +28,7 @@ $products = App::$db->getRowsWhere('items');
 <body>
 <main>
 
-    <?php require ROOT . '/app/templates/nav.tpl.php'; ?>
+<?php print $nav->render();?>
 
     <article class="wrapper">
         <h1 class="header header--main">Welcome to BBZ SHOP</h1>

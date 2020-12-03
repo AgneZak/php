@@ -2,104 +2,30 @@
 require '../bootloader.php';
 
 use App\App;
+use App\Views\Forms\RegisterForm;
+use App\Views\Navigation;
 
-$nav = nav();
+//
+//var_dump(App::$tracker->getTrackingData());
+//var_dump(App::$tracker->save());
 
-$form = [
-    'attr' => [
-        'method' => 'POST'
-    ],
-    'fields' => [
-        'email' => [
-            'label' => 'Email',
-            'type' => 'email',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_user_unique',
-                'validate_email'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'email@mail',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty',
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'password',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-        'password_repeat' => [
-            'label' => 'Password repeat',
-            'type' => 'password',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty',
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'password',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Registruokis',
-            'type' => 'submit',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ],
-        'clear' => [
-            'title' => 'Clear',
-            'type' => 'reset',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ]
-    ],
-    'validators' => [
-        'validate_field_match' => [
-            'password',
-            'password_repeat'
-        ],
-    ]
-];
+$nav = new Navigation();
 
-$clean_inputs = get_clean_input($form);
+$form = new RegisterForm();
 
-if ($clean_inputs) {
-    $success = validate_form($form, $clean_inputs);
 
-    if ($success) {
-        unset($clean_inputs['password_repeat']);
+if ($form->validate()) {
+    $clean_inputs = $form->values();
 
-        App::$db->insertRow('users', $clean_inputs);
+    unset($clean_inputs['password_repeat']);
 
-        $p = 'Sveikinu uzsireginus';
+    App::$db->insertRow('users', $clean_inputs);
 
-        header("Location: login.php");
-    } else {
-        $p = 'Eik nx';
-    }
+    $p = 'Sveikinu uzsireginus';
+
+    header("Location: login.php");
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -114,12 +40,12 @@ if ($clean_inputs) {
 <body>
 <main>
 
-    <?php require ROOT . '/app/templates/nav.tpl.php'; ?>
+    <?php print $nav->render(); ?>
 
     <article class="wrapper">
         <h1 class="header header--main">Reginkis</h1>
 
-        <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+        <?php print $form->render(); ?>
 
         <?php if (isset ($p)): ?>
             <p><?php print $p; ?></p>

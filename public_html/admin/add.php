@@ -1,6 +1,8 @@
 <?php
 
 use App\App;
+use App\Views\Forms\Admin\AddForm;
+use App\Views\Navigation;
 
 require '../../bootloader.php';
 
@@ -8,111 +10,25 @@ if (!App::$session->getUser()) {
     header("Location: /login.php");
     exit();
 }
+//
+//var_dump(App::$tracker->getTrackingData());
+//var_dump(App::$tracker->save());
 
-$nav = nav();
+$nav = new Navigation();
 
-$form = [
-    'attr' => [
-        'method' => 'POST'
-    ],
-    'fields' => [
-        'name' => [
-            'label' => 'Product name',
-            'type' => 'text',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Sock',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-        'price' => [
-            'label' => 'Price',
-            'type' => 'number',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty',
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => '99',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-        'img' => [
-            'label' => 'Product image',
-            'type' => 'text',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty',
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Http://url',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-        'descr' => [
-            'label' => 'Product Description',
-            'type' => 'textarea',
-            'validators' => [
-                'validate_field_not_empty'
-            ],
-        ],
-        'vegan' => [
-            'label' => 'Is it vegan?',
-            'type' => 'select',
-            'options' => [
-                'Vegan' => 'Vegan',
-                'Not-Vegan' => 'Not-Vegan'
-            ],
-            'validators' => [
-                'validate_select',
-            ],
-            'value' => 'Not-Vegan'
-        ],
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Prideti',
-            'type' => 'submit',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ],
-        'clear' => [
-            'title' => 'Clear',
-            'type' => 'reset',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ]
-    ]
-];
+$form = new AddForm();
 
-$clean_inputs = get_clean_input($form);
 
-if ($clean_inputs) {
-    $success = validate_form($form, $clean_inputs);
+if ($form->validate()) {
+    $clean_inputs = $form->values();
 
-    if ($success) {
-        App::$db->insertRow('items', $clean_inputs);
+    App::$db->insertRow('items', $clean_inputs);
 
-        $p = 'Sveikinu pridejus preke';
-    } else {
-        $p = 'Uzpildyki visus laukus';
-    }
+    $p = 'Sveikinu pridejus preke';
+} else {
+    $p = 'Uzpildyki visus laukus';
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -127,12 +43,12 @@ if ($clean_inputs) {
 <body>
 <main>
 
-    <?php require ROOT . '/app/templates/nav.tpl.php'; ?>
+    <?php print $nav->render(); ?>
 
     <article class="wrapper">
         <h1 class="header header--main">Prideki preke</h1>
 
-        <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+        <?php print $form->render(); ?>
 
         <?php if (isset ($p)): ?>
             <p><?php print $p; ?></p>

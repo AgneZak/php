@@ -16,7 +16,7 @@ function nav(): array
 
     if (App::$session->getUser()) {
         return $nav + [
-            '/admin/add.php' => 'Add',
+            '/Admin/add.php' => 'Add',
             '/logout.php' => 'Logout',
         ];
     } else {

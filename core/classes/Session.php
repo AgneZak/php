@@ -14,6 +14,7 @@ class Session
     {
         session_start();
         $this->loginFromCookie();
+
     }
 
     public function loginFromCookie(): bool
@@ -44,10 +45,8 @@ class Session
         ]);
 
         if ($user) {
-            $_SESSION = [
-                'email' => $email,
-                'password' => $password
-            ];
+            $_SESSION['email'] = $email;
+            $_SESSION['password'] = $password;
 
             $this->user = $user;
 

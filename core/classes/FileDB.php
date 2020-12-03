@@ -4,7 +4,7 @@ namespace Core;
 
 class FileDB
 {
-    private $file_name;
+    private string $file_name;
     private $data;
 
     /**

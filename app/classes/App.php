@@ -9,6 +9,8 @@ class App
 {
     public static $db;
     public static $session;
+    public static $tracker;
+
 
     public function __construct()
     {
@@ -16,6 +18,8 @@ class App
         self::$db->load();
 
         self::$session = new Session();
+        self::$tracker = new Tracker();
+
     }
 
     public function __destruct()

@@ -2,85 +2,30 @@
 require '../bootloader.php';
 
 use App\App;
+use App\Views\Forms\LoginForm;
+use App\Views\Navigation;
 
-$nav = nav();
+//var_dump(App::$tracker->getTrackingData());
+//var_dump(App::$tracker->save());
 
-$form = [
-    'attr' => [
-        'method' => 'POST'
-    ],
-    'fields' => [
-        'email' => [
-            'label' => 'Email',
-            'type' => 'email',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_email'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'email@mail',
-                    'class' => 'input-field'
-                ]
-            ]
-        ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'validators' => [
-                'validate_field_not_empty',
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'password',
-                    'class' => 'input-field'
-                ]
-            ]
-        ]
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Prisijunk',
-            'type' => 'submit',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ],
-        'clear' => [
-            'title' => 'Clear',
-            'type' => 'reset',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ]
-    ],
-    'validators' => [
-        'validate_login'
-    ]
-];
+$nav = new Navigation();
 
-$clean_inputs = get_clean_input($form);
+$form = new LoginForm();
 
-if ($clean_inputs) {
-    $success = validate_form($form, $clean_inputs);
 
-    if ($success) {
-        $p = 'Sveikinu prisijungus';
+if ($form->validate()) {
+    $p = 'Sveikinu prisijungus';
 
-        App::$session->login($clean_inputs['email'], $clean_inputs['password']);
+    $clean_inputs = $form->values();
 
-        if (App::$session->getUser()) {
-            header("Location: admin/add.php");
-            exit();
-        }
-    } else {
-        $p = 'Eik nx';
+    App::$session->login($clean_inputs['email'], $clean_inputs['password']);
+
+    if (App::$session->getUser()) {
+        header("Location: Admin/add.php");
+        exit();
     }
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -95,12 +40,12 @@ if ($clean_inputs) {
 <body>
 <main>
 
-    <?php require ROOT . '/app/templates/nav.tpl.php'; ?>
+    <?php print $nav->render(); ?>
 
     <article class="wrapper">
         <h1 class="header header--main">Prisijunki</h1>
 
-        <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+        <?php print $form->render(); ?>
 
         <?php if (isset ($p)): ?>
             <p><?php print $p; ?></p>
