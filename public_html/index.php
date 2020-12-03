@@ -11,6 +11,7 @@ if (App::$session->getUser()) {
 } else {
     $h3 = 'Jus neprisijunges';
 }
+
 $content = new View([
     'title' => 'Welcome to BBZ SHOP',
     'heading' => $h3,

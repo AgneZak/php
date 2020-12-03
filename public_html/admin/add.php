@@ -1,8 +1,9 @@
 <?php
 
 use App\App;
+use App\Views\BasePage;
 use App\Views\Forms\Admin\AddForm;
-use App\Views\Navigation;
+use Core\View;
 
 require '../../bootloader.php';
 
@@ -14,8 +15,6 @@ if (!App::$session->getUser()) {
 //var_dump(App::$tracker->getTrackingData());
 //var_dump(App::$tracker->save());
 
-$nav = new Navigation();
-
 $form = new AddForm();
 
 
@@ -25,37 +24,19 @@ if ($form->validate()) {
     App::$db->insertRow('items', $clean_inputs);
 
     $p = 'Sveikinu pridejus preke';
-} else {
-    $p = 'Uzpildyki visus laukus';
 }
 
+$content = new View([
+    'title' => 'Add',
+    'form' => $form->render(),
+    'message' => $p ?? null
+]);
+
+$page = new BasePage([
+    'title' => 'Add',
+    'content' => $content->render( ROOT . '/app/templates/content/forms.tpl.php')
+]);
+
+print $page->render();
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/media/style.css">
-    <title>Add</title>
-</head>
-<body>
-<main>
-
-    <?php print $nav->render(); ?>
-
-    <article class="wrapper">
-        <h1 class="header header--main">Prideki preke</h1>
-
-        <?php print $form->render(); ?>
-
-        <?php if (isset ($p)): ?>
-            <p><?php print $p; ?></p>
-        <?php endif; ?>
-
-    </article>
-</main>
-</body>
-</html>
 

@@ -19,7 +19,11 @@
     <?php print $data['header']; ?>
 </header>
 <main>
-    <?php print $data['content']; ?>
+    <article class="wrapper">
+
+        <?php print $data['content']; ?>
+
+    </article>
 </main>
 </body>
 </html>
