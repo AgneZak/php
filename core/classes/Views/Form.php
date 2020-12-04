@@ -4,6 +4,7 @@ namespace Core\Views;
 
 use App\App;
 use Core\View;
+use Exception;
 
 class Form extends View
 {
@@ -91,7 +92,11 @@ class Form extends View
     public function fill(array $values): void
     {
         foreach ($values as $value_id => $value) {
-            $this->data['fields'][$value_id]['value'] = $value;
+            if(isset($this->data['fields'][$value_id])) {
+                $this->data['fields'][$value_id]['value'] = $value;
+            } else {
+                throw new Exception("{$value_id} field doesnt exist");
+            }
         }
     }
 
