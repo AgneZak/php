@@ -15,7 +15,10 @@ if (!App::$session->getUser()) {
 $data = App::$db->getRowsWhere('items');
 
 foreach ($data as $id => $value){
-    $link = new Link($id);
+    $link = new Link([
+        'link' => "/admin/edit.php?id={$id}",
+        'text' => 'Edit'
+    ]);
     $data[$id]['link'] = $link->render();
 }
 

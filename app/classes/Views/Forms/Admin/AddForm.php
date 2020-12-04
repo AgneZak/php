@@ -77,7 +77,7 @@ class AddForm extends Form
             ],
             'buttons' => [
                 'submit' => [
-                    'title' => 'Prideti',
+                    'title' => 'Submit',
                     'type' => 'submit',
                     'extra' => [
                         'attr' => [

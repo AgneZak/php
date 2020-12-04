@@ -1,1 +1,1 @@
-<button><a href="/admin/edit.php?id=<?php print $data; ?>">Edit</a></button>
+<a href="<?php print $data['link']; ?>"><?php print $data['text']; ?></a>
