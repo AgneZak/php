@@ -41,5 +41,5 @@ $page = new BasePage([
 ]);
 
 print $page->render();
-?>
+
 

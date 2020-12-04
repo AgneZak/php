@@ -83,9 +83,14 @@ class Form extends View
         return false;
     }
 
-    public function fill($values)
+    /**
+     *Fills form inputs with given values
+     *
+     * @param array $values
+     */
+    public function fill(array $values): void
     {
-        foreach ($values as $value_id => $value){
+        foreach ($values as $value_id => $value) {
             $this->data['fields'][$value_id]['value'] = $value;
         }
     }

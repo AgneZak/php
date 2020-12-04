@@ -12,14 +12,15 @@ if (!App::$session->getUser()) {
     exit();
 }
 
-$data = App::$db->getRowsWhere('items');
+$rows = App::$db->getRowsWhere('items');
 
-foreach ($data as $id => $value){
+foreach ($rows as $id => $row){
     $link = new Link([
         'link' => "/admin/edit.php?id={$id}",
         'text' => 'Edit'
     ]);
-    $data[$id]['link'] = $link->render();
+
+    $rows[$id]['link'] = $link->render();
 }
 
 $table = new Table([
@@ -30,7 +31,7 @@ $table = new Table([
         'Description',
         'Options'
     ],
-    'rows' => $data
+    'rows' => $rows
 ]);
 
 $page = new BasePage([
@@ -39,5 +40,4 @@ $page = new BasePage([
 ]);
 
 print $page->render();
-?>
 
