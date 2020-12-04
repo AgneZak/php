@@ -6,12 +6,12 @@ use App\Views\BasePage;
 use App\Views\Forms\RegisterForm;
 use Core\View;
 
-//
-//var_dump(App::$tracker->getTrackingData());
-//var_dump(App::$tracker->save());
+if (App::$session->getUser()) {
+    header("Location: /index.php");
+    exit();
+}
 
 $form = new RegisterForm();
-
 
 if ($form->validate()) {
     $clean_inputs = $form->values();

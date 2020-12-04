@@ -2,6 +2,7 @@
 
 namespace Core\Views;
 
+use App\App;
 use Core\View;
 
 class Form extends View
@@ -29,7 +30,7 @@ class Form extends View
 
     public function isSubmitted(): bool
     {
-        return(bool) $this->values();
+        return (bool)$this->values();
     }
 
     /**
@@ -80,6 +81,13 @@ class Form extends View
         }
 
         return false;
+    }
+
+    public function fill($values)
+    {
+        foreach ($values as $value_id => $value){
+            $this->data['fields'][$value_id]['value'] = $value;
+        }
     }
 
 }
