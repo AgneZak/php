@@ -34,7 +34,7 @@ $table = new Table([
 ]);
 
 $page = new BasePage([
-    'title' => 'Edit Items',
+    'title' => 'Edit List',
     'content' => $table->render()
 ]);
 

@@ -6,14 +6,18 @@ use App\Views\Forms\Admin\AddForm;
 use Core\View;
 
 require '../../bootloader.php';
-
 if (!App::$session->getUser()) {
     header("Location: /login.php");
     exit();
 }
+$row_id = $_GET['id'] ?? null;
+
+if ($row_id === null) {
+    header("Location: /admin/list.php");
+    exit();
+}
 
 $form = new AddForm();
-$row_id = $_GET['id'];
 
 $form->fill(App::$db->getRowById('items', $row_id));
 
@@ -32,7 +36,7 @@ $content = new View([
 ]);
 
 $page = new BasePage([
-    'title' => 'Add',
+    'title' => 'Edit Item',
     'content' => $content->render(ROOT . '/app/templates/content/forms.tpl.php')
 ]);
 
