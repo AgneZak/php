@@ -38,11 +38,6 @@ foreach ($rows as $id => $row) {
     $rows[$id]['delete'] = $deleteForm->render();
 }
 
-if ($deleteForm->validate()) {
-    $clean_inputs = $deleteForm->values();
-
-    App::$db->deleteRow('items', $clean_inputs['id']);
-}
 
 $table = new Table([
     'headers' => [
