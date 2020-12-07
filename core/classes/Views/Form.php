@@ -101,7 +101,8 @@ class Form extends View
 
     static function action()
     {
-        return filter_input('action', FILTER_SANITIZE_SPECIAL_CHARS);
+        return filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS);
     }
+
 
 }
