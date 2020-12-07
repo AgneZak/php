@@ -50,6 +50,13 @@ function validate_login(array $filtered_input, array &$form): bool
     return false;
 }
 
+/**
+ * Used for deletion, checks if the fields value exists in database.
+ *
+ * @param string $field_input
+ * @param array $field
+ * @return bool
+ */
 function validate_row_exists(string $field_input, array &$field): bool
 {
     if (App::$db->rowExists('items', $field_input)) {
