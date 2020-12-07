@@ -31,7 +31,7 @@ if ($deleteForm->validate()) {
     $clean_inputs = $deleteForm->values();
 
     App::$db->deleteRow('items', $clean_inputs['id']);
-//    header("Location: /admin/list.php");
+    header("Location: /admin/list.php");
 }
 
 $table = new Table([
