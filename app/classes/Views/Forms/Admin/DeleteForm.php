@@ -8,7 +8,7 @@ use Core\Views\Form;
 
 class DeleteForm extends Form
 {
-    public function __construct($value)
+    public function __construct($value = null)
     {
         parent::__construct([
             'attr' => [

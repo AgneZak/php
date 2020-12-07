@@ -13,6 +13,14 @@ if (!App::$session->getUser()) {
     exit();
 }
 
+$deleteForm = new DeleteForm();
+
+if ($deleteForm->validate()) {
+    $clean_inputs = $deleteForm->values();
+
+    App::$db->deleteRow('items', $clean_inputs['id']);
+}
+
 $rows = App::$db->getRowsWhere('items');
 
 foreach ($rows as $id => $row) {
@@ -31,7 +39,6 @@ if ($deleteForm->validate()) {
     $clean_inputs = $deleteForm->values();
 
     App::$db->deleteRow('items', $clean_inputs['id']);
-    header("Location: /admin/list.php");
 }
 
 $table = new Table([
