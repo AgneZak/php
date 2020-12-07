@@ -49,3 +49,12 @@ function validate_login(array $filtered_input, array &$form): bool
 
     return false;
 }
+
+function validate_row_exists(string $field_input, array &$field): bool
+{
+    if (App::$db->rowExists('items', $field_input['id'])) {
+        return true;
+    }
+
+    return false;
+}

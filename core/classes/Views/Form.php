@@ -2,7 +2,6 @@
 
 namespace Core\Views;
 
-use App\App;
 use Core\View;
 use Exception;
 
