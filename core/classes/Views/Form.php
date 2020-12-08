@@ -87,6 +87,7 @@ class Form extends View
      *Fills form inputs with given values
      *
      * @param array $values
+     * @throws Exception
      */
     public function fill(array $values): void
     {
@@ -103,6 +104,5 @@ class Form extends View
     {
         return filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS);
     }
-
 
 }
