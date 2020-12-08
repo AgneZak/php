@@ -7,9 +7,9 @@ use Core\Session;
 
 class App
 {
-    public static $db;
-    public static $session;
-    public static $tracker;
+    public static FileDB $db;
+    public static Session $session;
+    public static Tracker $tracker;
 
 
     public function __construct()
