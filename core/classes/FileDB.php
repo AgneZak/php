@@ -5,7 +5,7 @@ namespace Core;
 class FileDB
 {
     private string $file_name;
-    private $data;
+    private array $data;
 
     /**
      * FileDB constructor.
