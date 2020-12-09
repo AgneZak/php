@@ -15,7 +15,7 @@ class ProductsTable extends Table
 
         foreach ($rows as $id => $row) {
             $link = new Link([
-                'link' => "/admin/edit.php?id={$id}",
+                'link' => "/edit?id={$id}",
                 'text' => 'Edit'
             ]);
 

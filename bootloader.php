@@ -12,6 +12,7 @@ require 'app/functions/form/validators.php';
 require 'app/classes/App.php';
 
 require 'vendor/autoload.php';
+require 'app/config/routes.php';
 
 $app = new App();
 

@@ -29,7 +29,7 @@ class EditController extends AuthController
         $row_id = $_GET['id'] ?? null;
 
         if ($row_id === null) {
-            header("Location: /admin/list.php");
+            header("Location: /list");
             exit();
         }
 

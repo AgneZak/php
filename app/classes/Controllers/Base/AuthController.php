@@ -8,7 +8,7 @@ use App\App;
 
 class AuthController
 {
-    protected string $redirect = '/login.php';
+    protected string $redirect = '/login';
 
     public function __construct()
     {

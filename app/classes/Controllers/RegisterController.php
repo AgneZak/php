@@ -32,7 +32,7 @@ class RegisterController extends GuestController
 
             App::$db->insertRow('users', $clean_inputs);
 
-            header("Location: login.php");
+            header("Location: /login");
         }
 
         $content = new View([

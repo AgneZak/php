@@ -1,9 +1,7 @@
 <?php
 
-use App\Controllers\HomeController;
+use Core\Router;
 
 require '../bootloader.php';
 
-$controller = new HomeController();
-
-print $controller->index();
+print Router::run();

@@ -17,14 +17,14 @@ class Navigation extends \Core\View
 
         if (App::$session->getUser()) {
             return $nav + [
-                    '/Admin/add.php' => 'Add',
-                    '/Admin/list.php' => 'Edit',
-                    '/logout.php' => 'Logout',
+                    '/add' => 'Add',
+                    '/list' => 'Edit',
+                    '/logout' => 'Logout',
                 ];
         } else {
             return $nav + [
-                    '/register.php' => 'Register',
-                    '/login.php' => 'Login',
+                    '/register' => 'Register',
+                    '/login' => 'Login',
                 ];
         }
     }
