@@ -12,10 +12,11 @@ class ProductsTable extends Table
     public function __construct()
     {
         $rows = App::$db->getRowsWhere('items');
+        $url = App::$router::getUrl('edit');
 
         foreach ($rows as $id => $row) {
             $link = new Link([
-                'link' => "/edit?id={$id}",
+                'link' => "{$url}?id={$id}",
                 'text' => 'Edit'
             ]);
 
