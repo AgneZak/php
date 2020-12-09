@@ -1,7 +1,8 @@
 <?php
 
-use Core\Router;
+use App\App;
 
 require '../bootloader.php';
 
-print Router::run();
+$app = new App();
+$app->run();

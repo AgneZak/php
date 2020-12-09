@@ -2,8 +2,7 @@
 
 use Core\Router;
 
-Router::add('index', '/index', '\App\Controllers\HomeController');
-Router::add('index1', '/', '\App\Controllers\HomeController');
+Router::add('index', '/', '\App\Controllers\HomeController');
 Router::add('index2', '/index.php', '\App\Controllers\HomeController');
 
 Router::add('login', '/login', '\App\Controllers\LoginController', 'login');

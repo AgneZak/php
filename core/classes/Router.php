@@ -77,8 +77,8 @@ class Router extends \Core\Abstracts\Router
     protected static function getRouteByUrl($url): ?array
     {
         // TODO: Implement getRouteByUrl() method.
+        $url_path = parse_url($url, PHP_URL_PATH);
         foreach (self::$routes as $route) {
-            $url_path = parse_url($url, PHP_URL_PATH);
             if ($route['url'] == $url_path) {
                 return $route;
             }
@@ -96,7 +96,6 @@ class Router extends \Core\Abstracts\Router
      */
     public static function getUrl($name): ?string
     {
-        // TODO: Implement getUrl() method.
         return self::$routes[$name]['url'] ?? null;
     }
 
@@ -113,7 +112,6 @@ class Router extends \Core\Abstracts\Router
      */
     public static function run(): ?string
     {
-        // TODO: Implement run() method.
         $route = self::getRouteByUrl($_SERVER['REQUEST_URI']);
         if ($route) {
             $controller = self::getControllerInstance($route['controller_name']);
@@ -122,6 +120,7 @@ class Router extends \Core\Abstracts\Router
             return $controller->$method();
         }
 
-        return null;
+        header("HTTP/1.0 404 Not Found");
+        exit();
     }
 }

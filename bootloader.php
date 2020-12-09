@@ -1,7 +1,5 @@
 <?php
 
-use App\App;
-
 define('ROOT', __DIR__);
 define('DB_FILE', ROOT . '/app/data/db.json');
 
@@ -14,7 +12,6 @@ require 'app/classes/App.php';
 require 'vendor/autoload.php';
 require 'app/config/routes.php';
 
-$app = new App();
 
 
 
